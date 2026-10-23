@@ -441,6 +441,10 @@ svg {
     opacity: 1;
   }
 }
+/* Sites that always open in their own tab show the arrow all the time */
+.side-item--external .side-ext {
+  opacity: 0.7;
+}
 
 .side-foot {
   margin: auto 0 0;
@@ -589,7 +593,7 @@ svg {
   outline: 1px solid var(--line);
   outline-offset: -1px;
 }
-.card-media > img {
+.card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -689,6 +693,7 @@ svg {
   justify-content: space-between;
   gap: 16px;
   padding-top: 18px;
+  min-height: 48px;
 }
 .card-ext {
   position: relative;
@@ -712,7 +717,7 @@ svg {
   color: var(--ink);
 }
 
-.card.is-placeholder .card-media > img {
+.card.is-placeholder .card-media img {
   opacity: 0.35;
 }
 .card-missing {
@@ -725,7 +730,7 @@ svg {
   .card:hover::before {
     transform: scaleX(1);
   }
-  .card:hover .card-media > img {
+  .card:hover .card-media img {
     transform: scale(1.035);
     opacity: 1;
   }
@@ -736,7 +741,7 @@ svg {
     transform: translateX(4px);
   }
 }
-.card:active .card-media > img {
+.card:active .card-media img {
   transform: scale(1.015);
   transition-duration: 0.2s;
 }
@@ -1168,6 +1173,7 @@ svg {
   .card-actions {
     gap: 12px;
     padding-top: 12px;
+    min-height: 42px;
   }
   .card-actions .cta,
   .card-ext {
@@ -1210,279 +1216,5 @@ svg {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
     animation-duration: 0.01ms !important;
-  }
-}
-
-/* ---------- Live previews (live.js) ----------
-   Drawn inside the card's image box, in each site's own palette, and sized
-   to the box itself so they work from desktop down to phone thumbnails. */
-
-.card-media {
-  container-type: inline-size;
-}
-.card-media.is-live {
-  position: relative;
-}
-
-.lv {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-  animation: lv-in 0.6s var(--ease-out) both;
-}
-@keyframes lv-in {
-  from {
-    opacity: 0;
-  }
-}
-
-/* Ledgerline: its dark palette, gain green and loss red */
-.lv--ledger {
-  gap: 6px;
-  padding: 6cqi 6cqi 4.5cqi;
-  background: #0b0c0e;
-  color: #eef0f2;
-}
-.lv-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-}
-.lv-figure {
-  display: grid;
-  min-width: 0;
-}
-.lv-label {
-  font-size: clamp(9px, 3.2cqi, 12px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8e929a;
-}
-.lv-value {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: clamp(15px, 8cqi, 30px);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-.lv-pl {
-  flex: none;
-  margin-top: 2px;
-  padding: 3px 7px;
-  border-radius: 6px;
-  font-family: var(--font-mono);
-  font-size: clamp(9px, 3.2cqi, 12px);
-  white-space: nowrap;
-}
-.lv-pl.is-up {
-  color: #3ddc97;
-  background: rgba(61, 220, 151, 0.12);
-}
-.lv-pl.is-down {
-  color: #ff6b61;
-  background: rgba(255, 107, 97, 0.13);
-}
-.lv-spark {
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-  margin: 2px 0;
-}
-.lv-spacer {
-  flex: 1;
-}
-.lv-bar {
-  display: flex;
-  gap: 2px;
-  height: 6px;
-  flex: none;
-  overflow: hidden;
-  border-radius: 3px;
-}
-.lv-bar > span {
-  min-width: 3px;
-  border-radius: 1px;
-}
-.lv-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 12px;
-  margin: 2px 0 0;
-  padding: 0;
-  list-style: none;
-  font-family: var(--font-mono);
-  font-size: clamp(9px, 3cqi, 11px);
-  color: #c3c7cd;
-}
-.lv-legend li {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
-}
-.lv-legend i {
-  width: 7px;
-  height: 7px;
-  border-radius: 2px;
-}
-.lv-foot {
-  margin: 0;
-  font-size: clamp(9px, 2.9cqi, 11px);
-  color: #5f636a;
-}
-
-/* CineVault: its cinema-dark background, a podium of your top three */
-.lv--cine {
-  justify-content: flex-end;
-  padding: 5cqi 6cqi 4cqi;
-  background:
-    radial-gradient(60% 70% at 15% 0%, rgba(94, 224, 255, 0.1), transparent 70%),
-    radial-gradient(55% 70% at 90% 0%, rgba(167, 139, 250, 0.12), transparent 70%),
-    #08090d;
-}
-.lv-posters {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 4cqi;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.lv-poster {
-  position: relative;
-  height: 86%;
-  aspect-ratio: 2 / 3;
-  order: 1;
-}
-.lv-poster:first-child {
-  height: 100%;
-  order: 2;
-}
-.lv-poster:nth-child(3) {
-  order: 3;
-}
-.lv-poster-img {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 6px;
-  background: #191d28;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  outline: 1px solid rgba(255, 255, 255, 0.07);
-  outline-offset: -1px;
-}
-.lv-poster:first-child .lv-poster-img {
-  outline-color: rgba(94, 224, 255, 0.5);
-  box-shadow:
-    0 0 0 1px rgba(94, 224, 255, 0.15),
-    0 10px 30px rgba(94, 224, 255, 0.18);
-}
-.lv-poster-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.lv-poster-img img.is-loaded {
-  opacity: 1;
-}
-.lv-poster-fallback {
-  padding: 8%;
-  font-size: clamp(8px, 2.8cqi, 11px);
-  font-weight: 600;
-  line-height: 1.25;
-  text-align: center;
-  color: #e9ecf4;
-}
-.lv-score {
-  position: absolute;
-  left: 50%;
-  bottom: -7px;
-  translate: -50% 0;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: #12151d;
-  border: 1px solid #333a4d;
-  color: #ffd76e;
-  font-family: var(--font-mono);
-  font-size: clamp(9px, 3cqi, 12px);
-  line-height: 1.3;
-  white-space: nowrap;
-}
-.lv-caption-short {
-  display: none;
-}
-.lv-caption {
-  margin: 13px 0 0;
-  font-size: clamp(9px, 3cqi, 11px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #939ab0;
-  text-align: center;
-}
-
-/* Phone thumbnails: just the essentials */
-@container (max-width: 200px) {
-  .lv--ledger {
-    justify-content: center;
-    gap: 8px;
-    padding: 10px;
-  }
-  .lv-top {
-    flex-direction: column;
-    gap: 6px;
-  }
-  .lv-value {
-    font-size: 14px;
-  }
-  .lv-label {
-    font-size: 8px;
-  }
-  .lv-pl {
-    font-size: 9px;
-    padding: 2px 5px;
-  }
-  .lv-spark,
-  .lv-legend,
-  .lv-foot,
-  .lv-spacer {
-    display: none;
-  }
-  .lv--cine {
-    padding: 10px 10px 8px;
-  }
-  .lv-poster:not(:first-child) {
-    display: none;
-  }
-  .lv-poster:first-child {
-    height: 88%;
-  }
-  .lv-caption {
-    margin-top: 12px;
-    font-size: 8px;
-  }
-  .lv-caption-long,
-  .lv-pct {
-    display: none;
-  }
-  .lv-caption-short {
-    display: inline;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lv {
-    animation: none;
   }
 }

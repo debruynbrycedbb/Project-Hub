@@ -113,7 +113,20 @@
           html: icons.external,
         })
       : null;
-    sideList.append(el('li', { class: 'side-item' }, [link, ext]));
+    sideList.append(el('li', { class: `side-item${external ? ' side-item--external' : ''}` }, [link, ext]));
+  }
+
+  // Say which sites open inside the hub and which open in their own tab.
+  {
+    const names = (list) => list.map((p) => p.name).join(list.length > 2 ? ', ' : ' and ').replace(/, ([^,]*)$/, ' and $1');
+    const inside = projects.filter((p) => p.available && p.embed !== false);
+    const outside = projects.filter((p) => p.available && p.embed === false);
+    const foot = $('[data-side-foot]');
+    if (foot && outside.length && inside.length) {
+      foot.textContent = `${names(inside)} ${inside.length > 1 ? 'open' : 'opens'} here. ${names(outside)} ${outside.length > 1 ? 'open' : 'opens'} in ${outside.length > 1 ? 'their' : 'its'} own tab.`;
+    } else if (foot && outside.length) {
+      foot.textContent = 'Each site opens in its own tab.';
+    }
   }
 
   /* ------------------------------------------------------------ cards */
@@ -122,7 +135,7 @@
   projects.forEach((p, i) => {
     const external = p.embed === false;
     const facts = (p.facts || []).slice(0, 3);
-    const card = el('li', { class: `card${p.available ? '' : ' is-placeholder'}`, style: `--i:${i + 3}`, 'data-card': p.id }, [
+    const card = el('li', { class: `card${p.available ? '' : ' is-placeholder'}`, style: `--i:${i + 3}` }, [
       el('div', { class: 'card-media' }, [
         p.preview
           ? el('img', {
@@ -164,7 +177,7 @@
           : null,
         el('div', { class: 'card-actions' }, [
           p.available
-            ? el('span', { class: 'cta', 'aria-hidden': 'true', html: `<span>${external ? 'Open site' : 'Open here'}</span>${icons.arrow}` })
+            ? el('span', { class: 'cta', 'aria-hidden': 'true', html: `<span>${external ? 'Open site' : 'Open here'}</span>${external ? icons.external : icons.arrow}` })
             : el('span', { class: 'card-missing', text: 'Add the address in projects.js to open this site' }),
           p.available && !external
             ? el('a', {
@@ -356,26 +369,6 @@
   /* ------------------------------------------------------------ globe */
 
   const globe = createGlobe($('[data-globe]'));
-
-  /* ------------------------------------------------------------ live previews */
-
-  // Cards with `live` set swap their illustration for the viewer's own data (see live.js).
-  // Nothing happens for visitors without data, so they keep the illustration.
-  if (window.HubLive) {
-    for (const p of projects) {
-      const adapter = p.available && p.live && window.HubLive[p.live];
-      const media = adapter && cardList.querySelector(`[data-card="${p.id}"] .card-media`);
-      if (!media) continue;
-      adapter(p, media, {
-        // Load the site in the background (hidden), e.g. so Ledgerline refreshes its prices.
-        prewarm() {
-          if (p.embed === false || frameCache.has(p.id)) return;
-          const f = frameFor(p);
-          if (current !== p) f.hidden = true;
-        },
-      });
-    }
-  }
 
   /* ------------------------------------------------------------ start */
 

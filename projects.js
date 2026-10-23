@@ -17,9 +17,6 @@
      order       Lower numbers come first.
      status      Optional. 'placeholder' shows "Address not set" and disables opening.
      embed       true opens the site inside the hub; false always opens a new tab.
-     live        Optional. 'ledgerline' or 'cinevault': on your own devices the card shows
-                 your real data instead of the preview image (see live.js). Visitors
-                 without data still see the image. Remove the line to turn it off.
    ========================================================================== */
 
 window.HUB_CONFIG = {
@@ -64,8 +61,9 @@ window.HUB_CONFIG = {
         { label: 'Built with', value: 'Supabase, TMDB' },
       ],
       order: 2,
-      embed: true,
-      live: 'cinevault', // your top 3 films, when you're signed in to CineVault in this browser
+      // Opens in its own tab: on bdbcloud.site the hub is a different address from this site,
+      // and inside the hub it would not see your sign-in. See README, "Why two sites open in a new tab".
+      embed: false,
     },
     {
       id: 'portfolio',
@@ -83,8 +81,9 @@ window.HUB_CONFIG = {
         { label: 'Built with', value: 'HTML, CSS, JS' },
       ],
       order: 3,
-      embed: true,
-      live: 'ledgerline', // your portfolio, from Ledgerline's data in this browser
+      // Opens in its own tab, for the same reason as CineVault: inside the hub it would not see
+      // the portfolio saved in your browser.
+      embed: false,
     },
   ],
 };

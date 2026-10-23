@@ -1166,7 +1166,21 @@ svg {
     display: none;
   }
   .card-actions {
+    gap: 12px;
     padding-top: 12px;
+  }
+  .card-actions .cta,
+  .card-ext {
+    white-space: nowrap;
+    letter-spacing: 0.16em;
+  }
+  .card-actions .cta {
+    gap: 8px;
+    font-size: 11px;
+  }
+  .card-actions .cta svg {
+    width: 16px;
+    height: 16px;
   }
   .cards {
     margin-top: 32px;
@@ -1176,6 +1190,16 @@ svg {
 @media (max-width: 380px) {
   .stats dd {
     font-size: 11px;
+  }
+}
+
+@media (max-width: 359px) {
+  .card-ext > span {
+    display: none;
+  }
+  .card-ext svg {
+    width: 16px;
+    height: 16px;
   }
 }
 

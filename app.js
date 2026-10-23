@@ -122,7 +122,7 @@
   projects.forEach((p, i) => {
     const external = p.embed === false;
     const facts = (p.facts || []).slice(0, 3);
-    const card = el('li', { class: `card${p.available ? '' : ' is-placeholder'}`, style: `--i:${i + 3}` }, [
+    const card = el('li', { class: `card${p.available ? '' : ' is-placeholder'}`, style: `--i:${i + 3}`, 'data-card': p.id }, [
       el('div', { class: 'card-media' }, [
         p.preview
           ? el('img', {
@@ -356,6 +356,26 @@
   /* ------------------------------------------------------------ globe */
 
   const globe = createGlobe($('[data-globe]'));
+
+  /* ------------------------------------------------------------ live previews */
+
+  // Cards with `live` set swap their illustration for the viewer's own data (see live.js).
+  // Nothing happens for visitors without data, so they keep the illustration.
+  if (window.HubLive) {
+    for (const p of projects) {
+      const adapter = p.available && p.live && window.HubLive[p.live];
+      const media = adapter && cardList.querySelector(`[data-card="${p.id}"] .card-media`);
+      if (!media) continue;
+      adapter(p, media, {
+        // Load the site in the background (hidden), e.g. so Ledgerline refreshes its prices.
+        prewarm() {
+          if (p.embed === false || frameCache.has(p.id)) return;
+          const f = frameFor(p);
+          if (current !== p) f.hidden = true;
+        },
+      });
+    }
+  }
 
   /* ------------------------------------------------------------ start */
 

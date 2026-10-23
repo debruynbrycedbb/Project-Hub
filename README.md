@@ -28,6 +28,30 @@ they open inside the hub they see the same saved data and sign-in as when you vi
 
 ---
 
+## Live previews on the cards
+
+On **your own devices**, two cards show your real data instead of the preview image:
+
+- **CineVault:** your three highest-rated films with their posters, when you're signed in to
+  CineVault in that browser.
+- **Ledgerline:** your portfolio value, P&L, the last 30 days of value and your allocation, from
+  Ledgerline's data in that browser. Ledgerline is quietly opened in the background so its prices
+  refresh, and the card updates as they arrive.
+
+How it works and what it means for privacy:
+
+- The hub reads this data **only from the browser it's open in** (it shares the
+  `debruynbrycedbb.github.io` address with both sites). Nothing is uploaded and nothing is added to the
+  repository, so other visitors just see the preview images.
+- It is **read-only**: the hub never changes your lists or your portfolio. CineVault is reached
+  with your existing sign-in, exactly like a second CineVault tab; the hub never signs anyone in.
+- Anyone using **your** browser will see these figures on the hub, the same as if they opened
+  Ledgerline or CineVault there.
+- To turn a live card off, delete its `live:` line in `projects.js`.
+- If a site changes how it stores data, its card simply falls back to the preview image.
+
+---
+
 ## Put it online (GitHub Pages, about 5 minutes)
 
 1. On GitHub, create a new **public** repository, for example `Project-Hub`.
@@ -81,6 +105,7 @@ at the top.
 | `styles.css` | All styling, same design language as the Photography Globe in blue |
 | `app.js` | Builds the sidebar and cards, switches views, draws the homepage globe |
 | `projects.js` | The list of projects (the only file you normally edit) |
+| `live.js` | The live previews on the CineVault and Ledgerline cards |
 | `assets/globe-data.js` | Coastlines and photo locations copied from the Photography Globe, for the homepage globe |
 | `assets/previews/` | Card images: one of your French Alps photos, and two drawn illustrations |
 | `assets/fonts/` | Archivo, Manrope and JetBrains Mono, the same fonts as the globe (free licences included) |

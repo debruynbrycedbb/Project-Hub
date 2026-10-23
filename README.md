@@ -8,8 +8,8 @@ One page that brings together three sites:
 | CineVault | Movie and series tracker | `https://debruynbrycedbb.github.io/Movies-and-Series-Site/` |
 | Ledgerline | Portfolio tracker | `https://debruynbrycedbb.github.io/Portfolio-Tracker-/` |
 
-The hub lives at **https://bdbcloud.site**. A sidebar lists the three sites. The Photography Globe
-opens **inside the hub**; CineVault and Ledgerline open in their own tab (see below). Inside the hub, a slim bar lets you go
+The hub lives at **https://bdbcloud.site**. A sidebar lists the three sites, and each opens
+**inside the hub** (see the note below about saved data), with a slim bar to go
 back, reload, or open the site in its own tab. The homepage has a short card for each site.
 
 Plain HTML, CSS and JavaScript. No build step, no npm, no accounts, nothing to pay for.
@@ -24,16 +24,17 @@ Plain HTML, CSS and JavaScript. No build step, no npm, no accounts, nothing to p
   can't clash with the data your sites keep.
 - To scrap the hub, delete its repository. The three sites carry on exactly as before.
 
-### Why two sites open in a new tab
+### CineVault and Ledgerline inside the hub
 
 Browsers keep each site's saved data (your Ledgerline portfolio, your CineVault sign-in) tied to
 its address. The hub is on `bdbcloud.site`, while CineVault and Ledgerline are on
-`debruynbrycedbb.github.io`. Shown inside the hub, they would get a separate, empty copy of that
-data, so they open in their own tab instead, where everything is there as normal. The Photography
-Globe doesn't save personal data, so it works inside the hub.
+`debruynbrycedbb.github.io`. Shown inside the hub, they get a **separate copy** of that data:
+Ledgerline doesn't show your usual portfolio there, and CineVault needs its own sign-in.
 
-To show them inside the hub again (and add live data to their cards), CineVault and Ledgerline
-would need to move onto subdomains of `bdbcloud.site`, such as `cinevault.bdbcloud.site`.
+When either is open inside the hub, a notice above it says so, with a link to open it in its own
+tab with your usual data. To always open a site in its own tab instead, set `embed: false` for it
+in `projects.js`. Moving CineVault and Ledgerline onto subdomains of `bdbcloud.site` (such as
+`cinevault.bdbcloud.site`) would make them share the same data inside the hub.
 
 ---
 

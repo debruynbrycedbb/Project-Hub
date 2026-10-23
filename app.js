@@ -261,6 +261,15 @@
     $('[data-viewer-url]').textContent = prettyUrl(p.url);
     $('[data-viewer-ext]').href = p.url;
     $('[data-viewer-ext]').setAttribute('aria-label', `Open ${p.name} in a new tab`);
+
+    const note = $('[data-viewer-note]');
+    note.hidden = !p.embedNote;
+    if (p.embedNote) {
+      $('[data-viewer-note-text]').textContent = p.embedNote;
+      const link = $('[data-viewer-note-link]');
+      link.href = p.url;
+      link.setAttribute('aria-label', `Open ${p.name} in a new tab with your usual data`);
+    }
   }
 
   $('[data-reload]').addEventListener('click', () => {

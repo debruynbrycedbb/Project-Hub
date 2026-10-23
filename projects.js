@@ -17,6 +17,8 @@
      order       Lower numbers come first.
      status      Optional. 'placeholder' shows "Address not set" and disables opening.
      embed       true opens the site inside the hub; false always opens a new tab.
+     embedNote   Optional. A short notice shown above the site when it's open inside the hub,
+                 with a link to open it in its own tab.
    ========================================================================== */
 
 window.HUB_CONFIG = {
@@ -61,9 +63,9 @@ window.HUB_CONFIG = {
         { label: 'Built with', value: 'Supabase, TMDB' },
       ],
       order: 2,
-      // Opens in its own tab: on bdbcloud.site the hub is a different address from this site,
-      // and inside the hub it would not see your sign-in. See README, "Why two sites open in a new tab".
-      embed: false,
+      embed: true,
+      // Shown above the site inside the hub: on bdbcloud.site it gets a separate copy of its saved data.
+      embedNote: 'Inside the hub, CineVault keeps a separate sign-in from your usual one.',
     },
     {
       id: 'portfolio',
@@ -81,9 +83,8 @@ window.HUB_CONFIG = {
         { label: 'Built with', value: 'HTML, CSS, JS' },
       ],
       order: 3,
-      // Opens in its own tab, for the same reason as CineVault: inside the hub it would not see
-      // the portfolio saved in your browser.
-      embed: false,
+      embed: true,
+      embedNote: 'Inside the hub, Ledgerline uses a separate copy of your saved portfolio.',
     },
   ],
 };

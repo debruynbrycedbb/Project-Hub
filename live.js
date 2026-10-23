@@ -123,7 +123,7 @@
   }
 
   function money(v, base, compact) {
-    const opts = { style: 'currency', currency: base, maximumFractionDigits: 2, minimumFractionDigits: 2 };
+    const opts = { style: 'currency', currency: base, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 2, minimumFractionDigits: 2 };
     if (compact && Math.abs(v) >= 100000) Object.assign(opts, { notation: 'compact', maximumFractionDigits: 1, minimumFractionDigits: 0 });
     return new Intl.NumberFormat(undefined, opts).format(v);
   }

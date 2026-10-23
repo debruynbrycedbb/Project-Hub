@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMid slice">
+  <!-- Abstract illustration in CineVault's palette: a shelf of posters, one picked out with a rating. -->
+  <defs>
+    <radialGradient id="glowA" cx="18%" cy="0%" r="70%">
+      <stop offset="0" stop-color="#5ee0ff" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#5ee0ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="88%" cy="6%" r="65%">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3550"/><stop offset="1" stop-color="#111522"/></linearGradient>
+    <linearGradient id="p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b2a4f"/><stop offset="1" stop-color="#151020"/></linearGradient>
+    <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16465a"/><stop offset=".55" stop-color="#0f2430"/><stop offset="1" stop-color="#0a1016"/></linearGradient>
+    <linearGradient id="p4" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3a24"/><stop offset="1" stop-color="#171209"/></linearGradient>
+    <linearGradient id="p5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#243042"/><stop offset="1" stop-color="#0d1018"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="#08090d"/>
+  <rect width="1200" height="750" fill="url(#glowA)"/>
+  <rect width="1200" height="750" fill="url(#glowB)"/>
+
+  <!-- shelf line -->
+  <line x1="0" y1="602" x2="1200" y2="602" stroke="#252a37" stroke-width="2"/>
+
+  <!-- posters, back row -->
+  <g opacity=".55">
+    <rect x="58" y="214" width="180" height="270" rx="8" fill="url(#p5)"/>
+    <rect x="962" y="214" width="180" height="270" rx="8" fill="url(#p2)"/>
+  </g>
+
+  <!-- posters, main row -->
+  <g>
+    <rect x="200" y="168" width="220" height="330" rx="10" fill="url(#p1)"/>
+    <circle cx="310" cy="300" r="64" fill="#5ee0ff" opacity=".08"/>
+    <rect x="232" y="438" width="120" height="8" rx="4" fill="#e9ecf4" opacity=".22"/>
+    <rect x="232" y="456" width="76" height="6" rx="3" fill="#e9ecf4" opacity=".12"/>
+    <rect x="200" y="168" width="220" height="330" rx="10" fill="url(#shade)"/>
+
+    <rect x="780" y="168" width="220" height="330" rx="10" fill="url(#p4)"/>
+    <path d="M780 420 L860 330 L920 380 L1000 300 L1000 498 L780 498 Z" fill="#ffd76e" opacity=".07"/>
+    <rect x="812" y="438" width="110" height="8" rx="4" fill="#e9ecf4" opacity=".22"/>
+    <rect x="812" y="456" width="66" height="6" rx="3" fill="#e9ecf4" opacity=".12"/>
+    <rect x="780" y="168" width="220" height="330" rx="10" fill="url(#shade)"/>
+  </g>
+
+  <!-- featured poster -->
+  <g>
+    <rect x="452" y="110" width="296" height="444" rx="12" fill="#5ee0ff" opacity=".22" filter="url(#soft)"/>
+    <rect x="452" y="110" width="296" height="444" rx="12" fill="url(#p3)"/>
+    <circle cx="600" cy="268" r="96" fill="none" stroke="#5ee0ff" stroke-opacity=".35" stroke-width="2"/>
+    <circle cx="600" cy="268" r="54" fill="#5ee0ff" opacity=".12"/>
+    <path d="M452 430 Q560 380 748 420 L748 554 L452 554 Z" fill="#0a1016" opacity=".6"/>
+    <rect x="484" y="472" width="168" height="10" rx="5" fill="#e9ecf4" opacity=".7"/>
+    <rect x="484" y="494" width="104" height="7" rx="3.5" fill="#e9ecf4" opacity=".3"/>
+    <rect x="452.5" y="110.5" width="295" height="443" rx="12" fill="none" stroke="#5ee0ff" stroke-opacity=".5"/>
+  </g>
+
+  <!-- rating under the featured poster -->
+  <g fill="#ffd76e">
+    <path id="star" d="M0 -11 L3.2 -3.4 L11.4 -3.4 L4.8 1.6 L7.2 9.6 L0 4.8 L-7.2 9.6 L-4.8 1.6 L-11.4 -3.4 L-3.2 -3.4 Z" transform="translate(540 646)"/>
+    <use href="#star" x="30"/>
+    <use href="#star" x="60"/>
+    <use href="#star" x="90"/>
+    <use href="#star" x="120" opacity=".28"/>
+  </g>
+</svg>

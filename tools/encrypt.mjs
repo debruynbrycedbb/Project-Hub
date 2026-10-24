@@ -56,11 +56,15 @@ for (const name of await readdir(join(srcDir, 'private')).catch(() => [])) {
   if (type) assets[`private/${name}`] = `data:${type};base64,${b64(await readFile(join(srcDir, 'private', name)))}`;
 }
 
+// Private images are written straight into the encrypted scripts as data: addresses, so they
+// work whatever version of login.js a browser still has cached.
+const inline = (code) =>
+  Object.entries(assets).reduce((s, [name, url]) => s.split(`'${name}'`).join(`'${url}'`), code);
+
 const payload = {
   v: 1,
-  assets,
   html: await readFile(join(srcDir, 'shell.html'), 'utf8'),
-  scripts: [await readFile(join(srcDir, 'projects.js'), 'utf8'), await readFile(join(srcDir, 'app.js'), 'utf8')],
+  scripts: [inline(await readFile(join(srcDir, 'projects.js'), 'utf8')), inline(await readFile(join(srcDir, 'app.js'), 'utf8'))],
 };
 
 // The username is case-insensitive ("bryce" works too); the password is exact.

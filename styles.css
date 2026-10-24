@@ -2,7 +2,7 @@
    Project hub: styles
    Same language as the Photography Globe (deep space, wide heavy headlines,
    tracked labels, monospaced values, thin rules), recoloured from mint to
-   glacier blue. Square corners throughout, as on the globe.
+   glacier blue. Square corners throughout, as on the photo globe.
    ========================================================================== */
 
 /* Fonts are self-hosted (the same families as the globe), Latin subset only. */
@@ -489,23 +489,23 @@ svg {
 
 .home-hero {
   position: relative;
-  min-height: clamp(250px, 34vh, 380px);
+  min-height: clamp(280px, 40vh, 420px);
 }
 
-.hero-globe {
+.hero-graph {
   position: absolute;
-  right: calc(-0.14 * min(50vw, 620px));
-  top: calc(-0.16 * min(50vw, 620px));
-  width: min(50vw, 620px);
-  height: min(50vw, 620px);
+  right: 0;
+  top: -64px;
+  width: min(48vw, 600px);
+  height: min(48vw, 600px);
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.6s var(--ease-out);
-  /* Dissolve the lower half so the globe sits above the cards like a horizon. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 42%, transparent 80%);
-  mask-image: linear-gradient(to bottom, #000 42%, transparent 80%);
+  /* Fade the bottom edge so the points settle into the page above the cards. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
 }
-.globe-ready .hero-globe {
+.graph-ready .hero-graph {
   opacity: 1;
 }
 
@@ -1015,11 +1015,11 @@ svg {
   .card-desc {
     margin-bottom: 16px;
   }
-  .hero-globe {
-    right: calc(-0.26 * min(56vw, 580px));
-    top: calc(-0.18 * min(56vw, 580px));
-    width: min(56vw, 580px);
-    height: min(56vw, 580px);
+  .hero-graph {
+    right: -2%;
+    top: -48px;
+    width: min(62vw, 560px);
+    height: min(62vw, 560px);
   }
 }
 
@@ -1153,13 +1153,17 @@ svg {
   .home-hero {
     min-height: 0;
   }
-  .hero-globe {
-    right: -22vw;
-    top: -14vw;
-    width: 66vw;
-    height: 66vw;
-    max-width: 460px;
-    max-height: 460px;
+  .hero-graph {
+    right: -28vw;
+    top: -12vw;
+    width: 86vw;
+    height: 86vw;
+    max-width: 520px;
+    max-height: 520px;
+    opacity: 0.55;
+  }
+  .graph-ready .hero-graph {
+    opacity: 0.55;
   }
   .hero-text {
     max-width: 30rem;

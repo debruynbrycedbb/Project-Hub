@@ -90,18 +90,20 @@ at the top.
 | --- | --- |
 | `index.html` | Page structure |
 | `styles.css` | All styling, same design language as the Photography Globe in blue |
-| `app.js` | Builds the sidebar and cards, switches views, draws the homepage globe |
+| `app.js` | Builds the sidebar and cards, switches views, draws the homepage constellation |
 | `projects.js` | The list of projects (the only file you normally edit) |
-| `assets/globe-data.js` | Coastlines and photo locations copied from the Photography Globe, for the homepage globe |
 | `assets/previews/` | Card images: one of your French Alps photos, and two drawn illustrations |
-| `assets/fonts/` | Archivo, Manrope and JetBrains Mono, the same fonts as the globe (free licences included) |
+| `assets/fonts/` | Archivo, Manrope and JetBrains Mono, the same fonts as the Photography Globe (free licences included) |
 
 - **Addresses:** the hub uses `#/` for home and `#/photography`, `#/movies`, `#/portfolio` for each
   site, so the browser's back button works and you can bookmark a site inside the hub.
 - **Switching is instant:** once a site has opened it stays loaded in the background, so going back
   to it keeps your place.
-- **The homepage globe** is a light 2D drawing, not 3D. It stops whenever it can't be seen, and stays
-  still if your device is set to reduce motion. The dots are your gallery locations.
+- **The homepage constellation** shows the hub and each site as bright points in a drifting field of
+  connected dots, with signals travelling along the links. It's built from `projects.js`, so adding a
+  project adds a point. Hovering a card or a sidebar link lights up that site, and the dots ease
+  away from your pointer. It pauses whenever it can't be seen and stays still if your device is set
+  to reduce motion.
 
 ---
 

@@ -16,12 +16,30 @@ Plain HTML, CSS and JavaScript. No build step, no npm, no accounts, nothing to p
 
 ---
 
+## Sign in
+
+The hub opens on a sign-in page. Only the sign-in page is readable here: the hub itself (its layout,
+site list and code) is published as **`hub.enc`**, encrypted with a key made from your username and
+password, and only appears once you sign in. The password is not stored anywhere in this repository.
+
+- The username isn't case-sensitive; the password is.
+- **Keep me signed in on this device** saves the unlock key (never the password) in that browser.
+  Untick it and you're signed out when the tab closes. **Sign out** is at the foot of the sidebar.
+- After a few wrong attempts the form makes you wait a few seconds between tries.
+
+**How strong is it?** It keeps anyone without the password out of the hub. But it runs entirely in
+the browser, so someone determined could download `hub.enc` and try every 6-digit password
+offline; with a fast graphics card that takes minutes. A longer password (letters, numbers and
+symbols, 12+ characters) makes that impractical. The three sites themselves are still public at
+their own addresses: this only locks the hub. Older versions of the hub's code are still visible
+in this repository's history; they only contain the links to those public sites.
+
 ## It does not touch your other sites
 
 - The hub lives in its **own repository** and needs no changes to the three sites.
 - The hub only *links to* the sites (and shows them in a frame). It never reads their code or data.
-- The hub saves **nothing** in the browser (no localStorage, no cookies, no service worker), so it
-  can't clash with the data your sites keep.
+- The hub saves only its own sign-in key in the browser (no cookies, no service worker), under its
+  own address, so it can't clash with the data your sites keep.
 - To scrap the hub, delete its repository. The three sites carry on exactly as before.
 
 ### CineVault and Ledgerline inside the hub
@@ -33,7 +51,7 @@ Ledgerline doesn't show your usual portfolio there, and CineVault needs its own 
 
 When either is open inside the hub, a notice above it says so, with a link to open it in its own
 tab with your usual data. To always open a site in its own tab instead, set `embed: false` for it
-in `projects.js`. Moving CineVault and Ledgerline onto subdomains of `bdbcloud.site` (such as
+in `hub-source/projects.js`. Moving CineVault and Ledgerline onto subdomains of `bdbcloud.site` (such as
 `cinevault.bdbcloud.site`) would make them share the same data inside the hub.
 
 ---
@@ -60,7 +78,7 @@ You can also double-click `index.html` to try it on your computer first.
 The Photography Globe address comes from the `CNAME` file in its repository. The other two are the
 **standard** GitHub Pages addresses for those repositories, which I couldn't open from here to
 confirm. Open each repository's **Settings → Pages**, copy the address shown at the top, and make
-sure it matches the `url` in `projects.js`.
+sure it matches the `url` in `hub-source/projects.js`.
 
 There are also older copies of both trackers in your GitHub (`Public-Movie-and-Series-Tracker`,
 `Portfolio-Tracker`, `Portfolio-Tracker-Live`, `Port-Tracker-FINAL`). The hub points at the newest
@@ -69,29 +87,31 @@ ones: `Movies-and-Series-Site` and `Portfolio-Tracker-` (the version with the ap
 
 ---
 
-## Editing projects
+## Editing projects, or changing the password
 
-Everything about the projects is in **`projects.js`**. Change a name, description, address or the
-facts on a card there and the sidebar, homepage and viewer all update. The file explains each field
-at the top.
+The readable hub lives **outside** this repository, in a folder called `hub-source/`, which has
+three files: `shell.html` (layout), `projects.js` (the site list: names, descriptions, addresses,
+card facts) and `app.js` (behaviour). Keep a copy on your computer; there's also one saved in the
+Website Hub project on Claude.
 
-- **Add a project:** copy one `{ ... }` block, give it a new `id`, and fill it in.
-- **Reorder:** change the `order` numbers.
-- **Not online yet:** set `status: 'placeholder'`. The card shows "Address not set" and can't be opened.
-- **Always open in a new tab:** set `embed: false` (useful if a site ever stops working inside the hub).
-- **Preview images:** put an image in `assets/previews/` and point `preview` at it. A screenshot
-  of each site at 1200 × 750 would work well.
+To publish a change, or to change the username or password:
 
----
+1. Edit the files in `hub-source/`.
+2. Run `node tools/encrypt.mjs path/to/hub-source` from this repository (Node.js 18 or newer). It asks
+   for the username and password, then rewrites `hub.enc`.
+3. Commit and push `hub.enc`.
+
+Re-encrypting signs out every device, so you'll sign in once more afterwards. Or ask Claude to do it.
 
 ## How it works
 
 | File | Job |
 | --- | --- |
-| `index.html` | Page structure |
+| `index.html` | The sign-in page |
+| `login.js` | Signs you in: unlocks `hub.enc` and puts the hub on the page |
+| `hub.enc` | The hub itself (layout, site list, code), encrypted |
+| `tools/encrypt.mjs` | Builds `hub.enc` from `hub-source/` |
 | `styles.css` | All styling, same design language as the Photography Globe in blue |
-| `app.js` | Builds the sidebar and cards, switches views, draws the homepage constellation |
-| `projects.js` | The list of projects (the only file you normally edit) |
 | `assets/previews/` | Card images: one of your French Alps photos, and two drawn illustrations |
 | `assets/fonts/` | Archivo, Manrope and JetBrains Mono, the same fonts as the Photography Globe (free licences included) |
 
@@ -100,7 +120,7 @@ at the top.
 - **Switching is instant:** once a site has opened it stays loaded in the background, so going back
   to it keeps your place.
 - **The homepage constellation** shows the hub and each site as bright points in a drifting field of
-  connected dots, with signals travelling along the links. It's built from `projects.js`, so adding a
+  connected dots, with signals travelling along the links. It's built from `hub-source/projects.js`, so adding a
   project adds a point. Hovering a card or a sidebar link lights up that site, and the dots ease
   away from your pointer. It pauses whenever it can't be seen and stays still if your device is set
   to reduce motion.

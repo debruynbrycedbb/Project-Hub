@@ -5,7 +5,8 @@
      node tools/encrypt.mjs path/to/hub-source
 
    hub-source/ holds the private, readable hub: shell.html (the page layout),
-   projects.js (the site list) and app.js (the behaviour). It is NOT kept in
+   projects.js (the site list), app.js (the behaviour) and private/ (images
+   that should only be seen after signing in, bundled into the encrypted file). It is NOT kept in
    this public repository. This script asks for the username and password
    (or reads HUB_USER and HUB_PASS), then writes hub.enc next to index.html.
 
@@ -17,7 +18,7 @@
    Uses only Node's built-in Web Crypto, so there is nothing to install.
    ========================================================================== */
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { webcrypto as crypto } from 'node:crypto';
@@ -48,8 +49,16 @@ if (!user || !pass) {
   process.exit(1);
 }
 
+const TYPES = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', svg: 'image/svg+xml' };
+const assets = {};
+for (const name of await readdir(join(srcDir, 'private')).catch(() => [])) {
+  const type = TYPES[name.split('.').pop().toLowerCase()];
+  if (type) assets[`private/${name}`] = `data:${type};base64,${b64(await readFile(join(srcDir, 'private', name)))}`;
+}
+
 const payload = {
   v: 1,
+  assets,
   html: await readFile(join(srcDir, 'shell.html'), 'utf8'),
   scripts: [await readFile(join(srcDir, 'projects.js'), 'utf8'), await readFile(join(srcDir, 'app.js'), 'utf8')],
 };

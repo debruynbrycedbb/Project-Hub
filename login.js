@@ -85,6 +85,13 @@
 
   // Put the hub on the page and run its scripts, in order.
   function mount(hub) {
+    // Private images arrive inside the hub; give the page short-lived local addresses for them.
+    window.HUB_ASSETS = {};
+    for (const [name, dataUrl] of Object.entries(hub.assets || {})) {
+      const [head, body] = dataUrl.split(',');
+      const type = head.slice(5, head.indexOf(';'));
+      window.HUB_ASSETS[name] = URL.createObjectURL(new Blob([fromB64(body)], { type }));
+    }
     screen.remove();
     document.body.classList.remove('is-locked');
     document.body.insertAdjacentHTML('afterbegin', hub.html);

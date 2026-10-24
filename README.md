@@ -90,8 +90,10 @@ ones: `Movies-and-Series-Site` and `Portfolio-Tracker-` (the version with the ap
 ## Editing projects, or changing the password
 
 The readable hub lives **outside** this repository, in a folder called `hub-source/`, which has
-three files: `shell.html` (layout), `projects.js` (the site list: names, descriptions, addresses,
-card facts) and `app.js` (behaviour). Keep a copy on your computer; there's also one saved in the
+`shell.html` (layout), `projects.js` (the site list: names, descriptions, addresses, card facts),
+`app.js` (behaviour) and a `private/` folder for images that should only be seen after signing in
+(like the CineVault top-three screenshot). Those images are encrypted with the hub, never published
+as files. Keep a copy on your computer; there's also one saved in the
 Website Hub project on Claude.
 
 To publish a change, or to change the username or password:

@@ -878,6 +878,23 @@ svg {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.viewer-note-close {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -8px -4px 2px;
+  flex: none;
+  color: var(--ink-3);
+  transition: color 0.2s;
+}
+.viewer-note-close svg {
+  width: 15px;
+  height: 15px;
+}
+.viewer-note-close:hover {
+  color: var(--ink);
+}
 @media (max-width: 899px) {
   .viewer-note {
     padding: 7px 12px;
@@ -894,9 +911,18 @@ svg {
   .viewer-note > svg {
     margin-top: 1px;
   }
+  .viewer-note {
+    grid-template-columns: 15px minmax(0, 1fr) 28px;
+  }
   .viewer-note a {
     grid-column: 2;
+    grid-row: 2;
     margin-left: 0;
+  }
+  .viewer-note-close {
+    grid-column: 3;
+    grid-row: 1;
+    margin: -5px -6px 0 0;
   }
 }
 

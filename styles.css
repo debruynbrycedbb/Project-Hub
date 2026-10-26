@@ -557,19 +557,24 @@ svg {
 .cards {
   position: relative;
   display: grid;
-  /* Two by two for four sites (or any even number); one row for three. */
+  /* Two by two for four sites; rows of three for three, five or six; one row on very wide screens. */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(28px, 3vw, 44px) clamp(20px, 2.2vw, 36px);
   margin: clamp(28px, 5vh, 56px) 0 0;
   padding: 0;
   list-style: none;
 }
-.cards[data-count='3'] {
+.cards[data-count='3'],
+.cards[data-count='5'],
+.cards[data-count='6'] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 @media (min-width: 1760px) {
   .cards[data-count='4'] {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .cards[data-count='5'] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 

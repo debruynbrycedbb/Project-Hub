@@ -1,6 +1,6 @@
 # Project hub
 
-One page that brings together four sites:
+One page that brings together five sites:
 
 | Site | What it is | Address used |
 | --- | --- | --- |
@@ -8,6 +8,7 @@ One page that brings together four sites:
 | CineVault | Movie and series tracker | `https://debruynbrycedbb.github.io/Movies-and-Series-Site/` |
 | Ledgerline | Portfolio tracker | `https://debruynbrycedbb.github.io/Portfolio-Tracker-/` |
 | Travel World Map | Travel map | `https://debruynbrycedbb.github.io/Travel-World-Map/` |
+| Interactive CV | Interactive CV | `https://debruynbrycedbb.github.io/Interactive-CV-Website/` |
 
 The hub lives at **https://bdbcloud.site**. A sidebar lists the three sites, and each opens
 **inside the hub** (see the note below about saved data), with a slim bar to go

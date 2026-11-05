@@ -1,6 +1,6 @@
 # Project hub
 
-One page that brings together six sites:
+One page that brings together eight sites:
 
 | Site | What it is | Address used |
 | --- | --- | --- |
@@ -10,6 +10,8 @@ One page that brings together six sites:
 | Travel World Map | Travel map | `https://debruynbrycedbb.github.io/Travel-World-Map/` |
 | Interactive CV | Interactive CV | `https://debruynbrycedbb.github.io/Interactive-CV-Website/` |
 | StudyVault | Study vault | `https://debruynbrycedbb.github.io/StudyVault-Website/` |
+| Jackob | 3D product showcase (Three.js, Blender models) | `https://debruynbrycedbb.github.io/Jackob-Blender-Site/` |
+| Georgina Marrison | Painting portfolio | `https://debruynbrycedbb.github.io/Georgina-Example-Portfolio/` |
 
 The hub lives at **https://bdbcloud.site**. A sidebar lists the three sites, and each opens
 **inside the hub** (see the note below about saved data), with a slim bar to go

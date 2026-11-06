@@ -453,6 +453,25 @@ svg {
   line-height: 1.6;
   color: var(--ink-3);
 }
+/* Shorter screens: tighten the sidebar so every site and Sign out fit without scrolling. */
+@media (min-width: 1241px) and (max-height: 960px) {
+  .sidebar { padding-top: 24px; padding-bottom: 18px; }
+  .side-nav { margin-top: 30px; }
+  .side-heading { margin: 16px 0 6px; padding-top: 16px; }
+  .side-list { gap: 2px; }
+  .side-link { padding-top: 6px; padding-bottom: 6px; }
+  .side-foot { padding-top: 18px; }
+}
+@media (min-width: 1241px) and (max-height: 820px) {
+  .side-nav { margin-top: 20px; }
+  .side-home { padding-top: 6px; padding-bottom: 6px; }
+  .side-link { padding-top: 4px; padding-bottom: 4px; }
+  .side-link { grid-template-columns: 38px minmax(0, 1fr); }
+  .side-thumb { width: 38px; }
+  .side-foot { display: none; }
+  .sidebar .side-signout { margin-top: auto; }
+}
+
 .inline-icon {
   display: inline-block;
   width: 13px;
@@ -558,7 +577,8 @@ svg {
   position: relative;
   display: grid;
   /* Two by two for four sites; rows of three for three, five, six or nine; rows of four for seven or eight
-     on wide screens; one row of four or five on very wide screens. */
+     on wide screens; one row of four or five on very wide screens,
+     and two rows of five for ten. */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(28px, 3vw, 44px) clamp(20px, 2.2vw, 36px);
   margin: clamp(28px, 5vh, 56px) 0 0;
@@ -582,6 +602,9 @@ svg {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .cards[data-count='5'] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .cards[data-count='10'] {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }

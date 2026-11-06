@@ -557,7 +557,7 @@ svg {
 .cards {
   position: relative;
   display: grid;
-  /* Two by two for four sites; rows of three for three, five or six; rows of four for seven or eight
+  /* Two by two for four sites; rows of three for three, five, six or nine; rows of four for seven or eight
      on wide screens; one row of four or five on very wide screens. */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(28px, 3vw, 44px) clamp(20px, 2.2vw, 36px);
@@ -567,7 +567,8 @@ svg {
 }
 .cards[data-count='3'],
 .cards[data-count='5'],
-.cards[data-count='6'] {
+.cards[data-count='6'],
+.cards[data-count='9'] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 @media (min-width: 1500px) {

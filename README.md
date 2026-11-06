@@ -1,6 +1,6 @@
 # Project hub
 
-One page that brings together eight sites:
+One page that brings together nine sites:
 
 | Site | What it is | Address used |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ One page that brings together eight sites:
 | StudyVault | Study vault | `https://debruynbrycedbb.github.io/StudyVault-Website/` |
 | Jackob | 3D product showcase (Three.js, Blender models) | `https://debruynbrycedbb.github.io/Jackob-Blender-Site/` |
 | Georgina Marrison | Painting portfolio | `https://debruynbrycedbb.github.io/Georgina-Example-Portfolio/` |
+| U9 Xtreme | 3D car showcase (Three.js) | `https://debruynbrycedbb.github.io/BYD-U9-Demo-Site/` |
 
 The hub lives at **https://bdbcloud.site**. A sidebar lists the three sites, and each opens
 **inside the hub** (see the note below about saved data), with a slim bar to go

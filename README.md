@@ -1,6 +1,6 @@
 # Project hub
 
-One page that brings together ten sites:
+One page that brings together eleven sites:
 
 | Site | What it is | Address used |
 | --- | --- | --- |
@@ -14,10 +14,11 @@ One page that brings together ten sites:
 | Georgina Marrison | Painting portfolio | `https://debruynbrycedbb.github.io/Georgina-Example-Portfolio/` |
 | U9 Xtreme | 3D car showcase (Three.js) | `https://debruynbrycedbb.github.io/BYD-U9-Demo-Site/` |
 | Weeknight | Recipes and weekly meal planner | `https://debruynbrycedbb.github.io/Recipe-Site/` |
+| Moon Racer | 3D driving game | `https://debruynbrycedbb.github.io/Moon-Racer/` |
 
-The hub lives at **https://bdbcloud.site**. A sidebar lists the three sites, and each opens
-**inside the hub** (see the note below about saved data), with a slim bar to go
-back, reload, or open the site in its own tab. The homepage has a short card for each site.
+The hub lives at **https://debruynbrycedbb.github.io/Project-Hub/** (until November 2026 it was on
+bdbcloud.site, which now belongs to my public hub, `BDB-Public-Hub`). A sidebar lists the sites, and
+each opens **inside the hub**, with a slim bar to go back, reload, or open the site in its own tab. The homepage has a short card for each site.
 
 Plain HTML, CSS and JavaScript. No build step, no npm, no accounts, nothing to pay for.
 
@@ -37,29 +38,29 @@ password, and only appears once you sign in. The password is not stored anywhere
 **How strong is it?** It keeps anyone without the password out of the hub. But it runs entirely in
 the browser, so someone determined could download `hub.enc` and try every 6-digit password
 offline; with a fast graphics card that takes minutes. A longer password (letters, numbers and
-symbols, 12+ characters) makes that impractical. The three sites themselves are still public at
+symbols, 12+ characters) makes that impractical. The sites themselves are still public at
 their own addresses: this only locks the hub. Older versions of the hub's code are still visible
 in this repository's history; they only contain the links to those public sites.
 
 ## It does not touch your other sites
 
-- The hub lives in its **own repository** and needs no changes to the three sites.
+- The hub lives in its **own repository** and needs no changes to the sites.
 - The hub only *links to* the sites (and shows them in a frame). It never reads their code or data.
-- The hub saves only its own sign-in key in the browser (no cookies, no service worker), under its
-  own address, so it can't clash with the data your sites keep.
-- To scrap the hub, delete its repository. The three sites carry on exactly as before.
+- The hub saves only its sign-in key (`hub.session`) and which notices you've closed
+  (`hub.dismissedNotes`) in the browser: no cookies, no service worker. The `hub.` names keep
+  them apart from the data your sites keep.
+- To scrap the hub, delete its repository. The sites carry on exactly as before.
 
-### CineVault and Ledgerline inside the hub
+### Saved data inside the hub
 
 Browsers keep each site's saved data (your Ledgerline portfolio, your CineVault sign-in) tied to
-its address. The hub is on `bdbcloud.site`, while CineVault and Ledgerline are on
-`debruynbrycedbb.github.io`. Shown inside the hub, they get a **separate copy** of that data:
-Ledgerline doesn't show your usual portfolio there, and CineVault needs its own sign-in.
+its address. The hub and most sites are on the same address, `debruynbrycedbb.github.io`, so inside
+the hub they show your **usual data**, exactly as in their own tab.
 
-When either is open inside the hub, a notice above it says so, with a link to open it in its own
-tab with your usual data. To always open a site in its own tab instead, set `embed: false` for it
-in `hub-source/projects.js`. Moving CineVault and Ledgerline onto subdomains of `bdbcloud.site` (such as
-`cinevault.bdbcloud.site`) would make them share the same data inside the hub.
+The other side of that: the hub's saved sign-in key sits on the same address as all those sites.
+They're all my own, so that's fine, but don't put a site there that runs code from someone else.
+Untick **Keep me signed in** if that ever matters. The Photography Globe has its own domain,
+`bdbphotography.site`, and keeps its data separately.
 
 ---
 
@@ -73,8 +74,8 @@ in `hub-source/projects.js`. Moving CineVault and Ledgerline onto subdomains of 
    **Deploy from a branch**, branch **main**, folder **/ (root)**, and press **Save**.
 4. After a minute or two the hub is live at `https://debruynbrycedbb.github.io/Project-Hub/`
    (the last part is whatever you named the repository).
-5. Custom domain: the `CNAME` file holds `bdbcloud.site`, so GitHub serves the hub there and
-   forwards the github.io address to it. Delete `CNAME` to go back to the github.io address.
+5. No custom domain: there is no `CNAME` file, so the hub stays on its github.io address. To give
+   it a domain, enter it under **Settings → Pages → Custom domain**.
 
 You can also double-click `index.html` to try it on your computer first.
 
@@ -106,8 +107,10 @@ Website Hub project on Claude.
 To publish a change, or to change the username or password:
 
 1. Edit the files in `hub-source/`.
-2. Run `node tools/encrypt.mjs path/to/hub-source` from this repository (Node.js 18 or newer). It asks
-   for the username and password, then rewrites `hub.enc`.
+2. Run `swift hub-tools/hub-lock.swift encrypt hub-source sites/Project-Hub/hub.enc` from the
+   website-designs folder (on a Mac, no install needed), or `node tools/encrypt.mjs path/to/hub-source`
+   from this repository (Node.js 18 or newer). It asks for the username and password, then rewrites
+   `hub.enc`.
 3. Commit and push `hub.enc`.
 
 Re-encrypting signs out every device, so you'll sign in once more afterwards. Or ask Claude to do it.
@@ -142,7 +145,7 @@ Tested in Chromium at desktop, laptop, tablet and phone sizes: layout, sidebar a
 keyboard navigation, reduced motion, back button, direct links, and opening Ledgerline inside the hub
 (from a local copy).
 
-Not tested, because this machine can't reach the live sites: loading the three **live** addresses
+Not tested, because this machine can't reach the live sites: loading the **live** addresses
 inside the hub, and Safari and Firefox. If a site doesn't appear inside the hub after deploying,
 the bar at the top always has **Open in a new tab**, and you can set `embed: false` for that site.
 
